@@ -1,0 +1,101 @@
+<div class="bl_flow_wrap">
+            <div class="bl_flow" data-aos="zoom-out" data-aos-delay="500">
+              <div class="bl_roller">
+                <img src="../../asset/img/pic/img_flow_1.svg" alt="" />
+              </div>
+            </div>
+            <div class="bl_flow" data-aos="zoom-out" data-aos-delay="500">
+              <div class="bl_roller">
+                <img src="../../asset/img/pic/img_flow_2.svg" alt="" />
+              </div>
+            </div>
+            <div class="bl_flow" data-aos="zoom-out" data-aos-delay="500">
+              <div class="bl_roller">
+                <img src="../../asset/img/pic/img_flow_3.svg" alt="" />
+              </div>
+            </div>
+          </div>
+
+
+
+.bl_flow_wrap {
+  position: absolute;
+  top: function.vw(200, 360);
+  transform: rotate(-24deg);
+}
+.bl_flow {
+  &:nth-of-type(2) {
+    margin-top: function.vw(100, 360);
+  }
+  &:nth-of-type(3) {
+    margin-top: function.vw(200, 360);
+  }
+}
+/* 애니메이션하는 요소 */
+.bl_roller {
+  position: absolute;
+}
+.bl_roller img {
+  height: function.vw(70, 360);
+  width: auto;
+}
+
+/* 애니메이션 */
+.bl_roller.original {
+  animation: 120s linear 0s infinite normal forwards running rollingleft1;
+}
+.bl_roller.clone {
+  animation: 120s linear 0s infinite normal none running rollingleft2;
+}
+@keyframes rollingleft1 {
+  /* 원본용 */
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  50.01% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rollingleft2 {
+  /* 클론용 */
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+
+
+
+
+
+
+
+ $(document).ready(function () {
+            $(".bl_flow").each(function (index) {
+              var roller = $(this).find(".bl_roller");
+              roller.attr("id", "roller1_" + index);
+
+              var clone = roller.clone(true);
+              clone.attr("id", "roller2_" + index);
+              $(this).append(clone);
+
+              $("#roller1_" + index).css("left", "0px");
+              $("#roller2_" + index).css("left", roller.outerWidth() + "px");
+
+              roller.addClass("original");
+              clone.addClass("clone");
+            });
+          });
+
+
+
